@@ -2,6 +2,7 @@ import 'package:bmi/Utilities/constants.dart';
 import 'package:bmi/custom_widgets/custom_button.dart';
 import 'package:bmi/custom_widgets/gender_card_content.dart';
 import 'package:bmi/custom_widgets/reusable_card.dart';
+import 'package:bmi/models/result.dart';
 import 'package:bmi/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,6 +18,33 @@ class _InputPageState extends State<InputPage> {
   double height = 100.0;
   int weight = 50;
   int age = 20;
+
+  Result calculate() {
+    var bmi_result = 0.0;
+    bmi_result = weight / ((height / 100) * (height / 100));
+    var result_text = '';
+
+    if (bmi_result.round() < 16) {
+      result_text = 'Severe Thinness';
+    } else if (bmi_result.round() == 16 || bmi_result.round() < 17) {
+      result_text = 'Moderate Thinness';
+    } else if (bmi_result.round() == 17 || bmi_result.round() < 18.5) {
+      result_text = 'Mild Thinness';
+    } else if (bmi_result.round() == 18.5 || bmi_result.round() < 25) {
+      result_text = 'Normal';
+    } else if (bmi_result.round() == 25 || bmi_result.round() < 30) {
+      result_text = 'Overweight';
+    } else if (bmi_result.round() == 30 || bmi_result.round() < 35) {
+      result_text = 'Obese Class I';
+    } else if (bmi_result.round() == 35 || bmi_result.round() < 40) {
+      result_text = 'Obese Class II';
+    } else if (bmi_result.round() > 40) {
+      result_text = 'Obese Class III';
+    }
+
+    return Result(value: bmi_result, text: result_text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -267,13 +295,21 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           CustomButton(
+            btnText: 'Calculate',
             onPress: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ResultsPage(),
-                ),
-              );
+              var result = calculate();
+              print('re is ${result.value} - tx is ${result.text}');
+              if (result.text != '' && result.value != 0.0) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultsPage(
+                      result: result.value,
+                      resultText: result.text,
+                    ),
+                  ),
+                );
+              }
             },
           )
         ],
