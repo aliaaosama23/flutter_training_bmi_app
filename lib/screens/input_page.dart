@@ -3,7 +3,7 @@ import 'package:bmi/Utilities/constants.dart';
 import 'package:bmi/custom_widgets/custom_button.dart';
 import 'package:bmi/custom_widgets/gender_card_content.dart';
 import 'package:bmi/custom_widgets/reusable_card.dart';
-import 'package:bmi/models/result.dart';
+import 'package:bmi/models/gender.dart';
 import 'package:bmi/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,6 +19,28 @@ class _InputPageState extends State<InputPage> {
   double height = 100.0;
   int weight = 50;
   int age = 20;
+  Color maleCardColor = kActiveCardColor;
+  Color femaleCardColor = kActiveCardColor;
+
+  chooseGender(Gender gender) {
+    setState(() {
+      if (gender == Gender.male) {
+        if (maleCardColor == kInActiveCardColor) {
+          maleCardColor = kActiveCardColor;
+        } else {
+          maleCardColor = kInActiveCardColor;
+          femaleCardColor = kActiveCardColor;
+        }
+      } else {
+        if (femaleCardColor == kInActiveCardColor) {
+          femaleCardColor = kActiveCardColor;
+        } else {
+          femaleCardColor = kInActiveCardColor;
+          maleCardColor = kActiveCardColor;
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,21 +52,33 @@ class _InputPageState extends State<InputPage> {
         children: [
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
-                  child: ReusableCard(
-                    cardChild: GenderCardContent(
-                      cardIcon: FontAwesomeIcons.mars,
-                      cardText: 'MALE',
+                  child: GestureDetector(
+                    onTap: () {
+                      chooseGender(Gender.male);
+                    },
+                    child: ReusableCard(
+                      cardColor: maleCardColor,
+                      cardChild: const GenderCardContent(
+                        cardIcon: FontAwesomeIcons.mars,
+                        genderType: Gender.male,
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: ReusableCard(
-                    cardChild: GenderCardContent(
-                      cardIcon: FontAwesomeIcons.venus,
-                      cardText: 'FEMALE',
-                      cardIconAngle: 45 / 360,
+                  child: GestureDetector(
+                    onTap: () {
+                      chooseGender(Gender.female);
+                    },
+                    child: ReusableCard(
+                      cardColor: femaleCardColor,
+                      cardChild: const GenderCardContent(
+                        cardIcon: FontAwesomeIcons.venus,
+                        genderType: Gender.female,
+                        cardIconAngle: 45 / 360,
+                      ),
                     ),
                   ),
                 ),
@@ -53,6 +87,7 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
               child: ReusableCard(
+            cardColor: kActiveCardColor,
             cardChild: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -121,6 +156,7 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                     child: ReusableCard(
+                  cardColor: kActiveCardColor,
                   cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -194,6 +230,7 @@ class _InputPageState extends State<InputPage> {
                 )),
                 Expanded(
                   child: ReusableCard(
+                    cardColor: kActiveCardColor,
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -273,7 +310,6 @@ class _InputPageState extends State<InputPage> {
             btnText: 'Calculate',
             onPress: () {
               var result = Calculator(weight, height).calculate();
-              print('re is ${result.value} - tx is ${result.text}');
               if (result.text != '' && result.value != 0.0) {
                 Navigator.push(
                   context,

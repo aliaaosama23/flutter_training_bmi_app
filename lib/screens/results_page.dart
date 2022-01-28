@@ -40,6 +40,7 @@ class ResultsPage extends StatelessWidget {
             Expanded(
               flex: 5,
               child: ReusableCard(
+                cardColor: kActiveCardColor,
                 cardChild: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
