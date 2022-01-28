@@ -9,11 +9,12 @@ class GenderCardContent extends StatelessWidget {
     required this.cardIcon,
     required this.genderType,
     this.cardIconAngle = 1,
+    required this.selected,
   }) : super(key: key);
   final IconData cardIcon;
   final Gender genderType;
   final double? cardIconAngle;
-  final Color iconAndTextColor = kGrayTextColor;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class GenderCardContent extends StatelessWidget {
           child: FaIcon(
             cardIcon,
             size: 80,
-            color: iconAndTextColor,
+            color: selected ? kWhiteTextColor : kGrayTextColor,
           ),
         ),
         const SizedBox(
@@ -34,7 +35,7 @@ class GenderCardContent extends StatelessWidget {
         Text(
           genderType == Gender.male ? 'MALE' : 'FEMALE',
           style: TextStyle(
-            color: iconAndTextColor,
+            color: selected ? kWhiteTextColor : kGrayTextColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
             letterSpacing: 1.2,

@@ -21,10 +21,16 @@ class _InputPageState extends State<InputPage> {
   int age = 20;
   Color maleCardColor = kActiveCardColor;
   Color femaleCardColor = kActiveCardColor;
+  bool selectMale = false;
+  bool selectFemale = false;
+  Gender? selectedGender;
 
   chooseGender(Gender gender) {
+    selectedGender = gender;
     setState(() {
       if (gender == Gender.male) {
+        selectMale = true;
+        selectFemale = false;
         if (maleCardColor == kInActiveCardColor) {
           maleCardColor = kActiveCardColor;
         } else {
@@ -32,6 +38,8 @@ class _InputPageState extends State<InputPage> {
           femaleCardColor = kActiveCardColor;
         }
       } else {
+        selectMale = false;
+        selectFemale = true;
         if (femaleCardColor == kInActiveCardColor) {
           femaleCardColor = kActiveCardColor;
         } else {
@@ -54,31 +62,25 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      chooseGender(Gender.male);
-                    },
-                    child: ReusableCard(
-                      cardColor: maleCardColor,
-                      cardChild: const GenderCardContent(
-                        cardIcon: FontAwesomeIcons.mars,
-                        genderType: Gender.male,
-                      ),
+                  child: ReusableCard(
+                    onPress: () => chooseGender(Gender.male),
+                    cardColor: maleCardColor,
+                    cardChild: GenderCardContent(
+                      selected: selectMale,
+                      cardIcon: FontAwesomeIcons.mars,
+                      genderType: Gender.male,
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      chooseGender(Gender.female);
-                    },
-                    child: ReusableCard(
-                      cardColor: femaleCardColor,
-                      cardChild: const GenderCardContent(
-                        cardIcon: FontAwesomeIcons.venus,
-                        genderType: Gender.female,
-                        cardIconAngle: 45 / 360,
-                      ),
+                  child: ReusableCard(
+                    onPress: () => chooseGender(Gender.female),
+                    cardColor: femaleCardColor,
+                    cardChild: GenderCardContent(
+                      selected: selectFemale,
+                      cardIcon: FontAwesomeIcons.venus,
+                      genderType: Gender.female,
+                      cardIconAngle: 45 / 360,
                     ),
                   ),
                 ),
@@ -309,6 +311,7 @@ class _InputPageState extends State<InputPage> {
           CustomButton(
             btnText: 'Calculate',
             onPress: () {
+              print('selected gender $selectedGender');
               var result = Calculator(weight, height).calculate();
               if (result.text != '' && result.value != 0.0) {
                 Navigator.push(
