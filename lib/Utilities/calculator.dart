@@ -6,7 +6,7 @@ class Calculator {
   final int weight;
   final double height;
   final int age;
-  final Gender gender;
+  final Gender? gender;
 
   Calculator(this.weight, this.height, this.age, this.gender);
   Result calculate() {

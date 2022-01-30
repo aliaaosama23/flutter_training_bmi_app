@@ -29,3 +29,26 @@ const TextStyle kValueTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   letterSpacing: 0.8,
 );
+const TextStyle kTitleTextStyle = TextStyle(
+  fontSize: 40,
+  color: kWhiteTextColor,
+  fontWeight: FontWeight.bold,
+);
+
+const TextStyle kResultTextStyle = TextStyle(
+  color: kGreenTextColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 30,
+);
+
+const TextStyle kResultValueTextStyle = TextStyle(
+  color: kWhiteTextColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 80,
+  letterSpacing: 2,
+);
+
+const TextStyle kSaveButtonTextStyle = TextStyle(
+  fontSize: 20,
+  letterSpacing: 2,
+);

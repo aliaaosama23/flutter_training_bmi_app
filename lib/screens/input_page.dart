@@ -107,12 +107,7 @@ class _InputPageState extends State<InputPage> {
                   children: [
                     Text(
                       height.toString(),
-                      style: const TextStyle(
-                        color: kWhiteTextColor,
-                        fontSize: 60,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.8,
-                      ),
+                      style: kValueTextStyle,
                     ),
                     const Text(
                       'cm',

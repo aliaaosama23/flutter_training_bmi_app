@@ -30,11 +30,7 @@ class ResultsPage extends StatelessWidget {
               ),
               child: Text(
                 'Your Results',
-                style: TextStyle(
-                  fontSize: 40,
-                  color: kWhiteTextColor,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: kTitleTextStyle,
               ),
             ),
             Expanded(
@@ -47,20 +43,11 @@ class ResultsPage extends StatelessWidget {
                   children: [
                     Text(
                       resultText.toUpperCase(),
-                      style: const TextStyle(
-                        color: kGreenTextColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                      ),
+                      style: kResultTextStyle,
                     ),
                     Text(
                       result.toStringAsFixed(1),
-                      style: const TextStyle(
-                        color: kWhiteTextColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 80,
-                        letterSpacing: 2,
-                      ),
+                      style: kResultValueTextStyle,
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(
@@ -82,10 +69,7 @@ class ResultsPage extends StatelessWidget {
                       },
                       child: const Text(
                         'SAVE RESULT',
-                        style: TextStyle(
-                          fontSize: 20,
-                          letterSpacing: 2,
-                        ),
+                        style: kSaveButtonTextStyle,
                       ),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
