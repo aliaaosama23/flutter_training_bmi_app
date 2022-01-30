@@ -296,7 +296,7 @@ class _InputPageState extends State<InputPage> {
             onPress: () {
               print('selected gender $selectedGender');
               var result =
-                  Calculator(weight, height, age, selectedGender!).calculate();
+                  Calculator(weight, height, age, selectedGender).calculate();
               if (result.text != '' && result.value != 0.0) {
                 Navigator.push(
                   context,

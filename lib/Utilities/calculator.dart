@@ -8,7 +8,7 @@ class Calculator {
   final int age;
   final Gender? gender;
 
-  Calculator(this.weight, this.height, this.age, this.gender);
+  Calculator(this.weight, this.height, this.age, [this.gender]);
   Result calculate() {
     var bmi_result = 0.0;
     bmi_result = weight / pow((height / 100), 2);
