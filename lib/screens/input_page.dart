@@ -98,10 +98,7 @@ class _InputPageState extends State<InputPage> {
                 ),
                 const Text(
                   'HEIGHT',
-                  style: TextStyle(
-                    color: kGrayTextColor,
-                    fontSize: 23,
-                  ),
+                  style: kLabelTextStyle,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -119,10 +116,7 @@ class _InputPageState extends State<InputPage> {
                     ),
                     const Text(
                       'cm',
-                      style: TextStyle(
-                        color: kGrayTextColor,
-                        fontSize: 28,
-                      ),
+                      style: kUnitTextStyle,
                     )
                   ],
                 ),
@@ -167,19 +161,11 @@ class _InputPageState extends State<InputPage> {
                       ),
                       const Text(
                         'WEIGHT',
-                        style: TextStyle(
-                          color: kGrayTextColor,
-                          fontSize: 23,
-                        ),
+                        style: kLabelTextStyle,
                       ),
                       Text(
                         weight.toString(),
-                        style: const TextStyle(
-                          color: kWhiteTextColor,
-                          fontSize: 60,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.8,
-                        ),
+                        style: kValueTextStyle,
                       ),
                       const SizedBox(
                         height: 10,
@@ -241,19 +227,11 @@ class _InputPageState extends State<InputPage> {
                         ),
                         const Text(
                           'AGE',
-                          style: TextStyle(
-                            color: kGrayTextColor,
-                            fontSize: 23,
-                          ),
+                          style: kLabelTextStyle,
                         ),
                         Text(
                           age.toString(),
-                          style: const TextStyle(
-                            color: kWhiteTextColor,
-                            fontSize: 60,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.8,
-                          ),
+                          style: kValueTextStyle,
                         ),
                         const SizedBox(
                           height: 10,
@@ -312,7 +290,8 @@ class _InputPageState extends State<InputPage> {
             btnText: 'Calculate',
             onPress: () {
               print('selected gender $selectedGender');
-              var result = Calculator(weight, height).calculate();
+              var result =
+                  Calculator(weight, height, age, selectedGender!).calculate();
               if (result.text != '' && result.value != 0.0) {
                 Navigator.push(
                   context,

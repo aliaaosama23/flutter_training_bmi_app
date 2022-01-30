@@ -14,3 +14,18 @@ const Color kSaveButton = Color(0xFF191a2e);
 const Color kFloatingButtonBackground = Color(0xFF202747);
 const Color kFloatingButtonForeground = Color(0xFFC6CCDB);
 const double kButtonHeight = 80;
+const TextStyle kLabelTextStyle = TextStyle(
+  color: kGrayTextColor,
+  fontSize: 23,
+);
+const TextStyle kUnitTextStyle = TextStyle(
+  color: kGrayTextColor,
+  fontSize: 28,
+);
+
+const TextStyle kValueTextStyle = TextStyle(
+  color: kWhiteTextColor,
+  fontSize: 60,
+  fontWeight: FontWeight.bold,
+  letterSpacing: 0.8,
+);

@@ -1,11 +1,14 @@
+import 'package:bmi/models/gender.dart';
 import 'package:bmi/models/result.dart';
 import 'dart:math';
 
 class Calculator {
   final int weight;
   final double height;
+  final int age;
+  final Gender gender;
 
-  Calculator(this.weight, this.height);
+  Calculator(this.weight, this.height, this.age, this.gender);
   Result calculate() {
     var bmi_result = 0.0;
     bmi_result = weight / pow((height / 100), 2);
