@@ -169,6 +169,10 @@ class _InputPageState extends State<InputPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           RawMaterialButton(
+                            constraints: const BoxConstraints(
+                              minHeight: 60,
+                              minWidth: 60,
+                            ),
                             shape: const CircleBorder(),
                             elevation: 0.0,
                             onPressed: () {
@@ -178,17 +182,21 @@ class _InputPageState extends State<InputPage> {
                                 }
                               });
                             },
-                            child: const Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: FaIcon(
-                                FontAwesomeIcons.minus,
-                                size: 25,
-                                color: kFloatingButtonForeground,
-                              ),
+                            child: const FaIcon(
+                              FontAwesomeIcons.minus,
+                              size: 25,
+                              color: kFloatingButtonForeground,
                             ),
                             fillColor: kFloatingButtonBackground,
                           ),
+                          const SizedBox(
+                            width: 15,
+                          ),
                           RawMaterialButton(
+                            constraints: const BoxConstraints(
+                              minHeight: 60,
+                              minWidth: 60,
+                            ),
                             shape: const CircleBorder(),
                             elevation: 0.0,
                             onPressed: () {
@@ -196,13 +204,10 @@ class _InputPageState extends State<InputPage> {
                                 weight++;
                               });
                             },
-                            child: const Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: FaIcon(
-                                FontAwesomeIcons.plus,
-                                size: 25,
-                                color: kFloatingButtonForeground,
-                              ),
+                            child: const FaIcon(
+                              FontAwesomeIcons.plus,
+                              size: 25,
+                              color: kFloatingButtonForeground,
                             ),
                             fillColor: kFloatingButtonBackground,
                           ),
@@ -235,6 +240,10 @@ class _InputPageState extends State<InputPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RawMaterialButton(
+                              constraints: const BoxConstraints(
+                                minHeight: 60,
+                                minWidth: 60,
+                              ),
                               shape: const CircleBorder(),
                               elevation: 0.0,
                               onPressed: () {
@@ -244,17 +253,21 @@ class _InputPageState extends State<InputPage> {
                                   }
                                 });
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.all(20),
-                                child: FaIcon(
-                                  FontAwesomeIcons.minus,
-                                  size: 25,
-                                  color: kFloatingButtonForeground,
-                                ),
+                              child: const FaIcon(
+                                FontAwesomeIcons.minus,
+                                size: 25,
+                                color: kFloatingButtonForeground,
                               ),
                               fillColor: kFloatingButtonBackground,
                             ),
+                            const SizedBox(
+                              width: 15,
+                            ),
                             RawMaterialButton(
+                              constraints: const BoxConstraints(
+                                minHeight: 60,
+                                minWidth: 60,
+                              ),
                               shape: const CircleBorder(),
                               elevation: 0.0,
                               onPressed: () {
@@ -262,13 +275,10 @@ class _InputPageState extends State<InputPage> {
                                   age++;
                                 });
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.all(20.0),
-                                child: FaIcon(
-                                  FontAwesomeIcons.plus,
-                                  size: 25,
-                                  color: kFloatingButtonForeground,
-                                ),
+                              child: const FaIcon(
+                                FontAwesomeIcons.plus,
+                                size: 25,
+                                color: kFloatingButtonForeground,
                               ),
                               fillColor: kFloatingButtonBackground,
                             ),
