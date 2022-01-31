@@ -146,145 +146,44 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                    child: ReusableCard(
-                  cardColor: kActiveCardColor,
-                  cardChild: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Text(
-                        'WEIGHT',
-                        style: kLabelTextStyle,
-                      ),
-                      Text(
-                        weight.toString(),
-                        style: kValueTextStyle,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RawMaterialButton(
-                            constraints: const BoxConstraints(
-                              minHeight: 60,
-                              minWidth: 60,
-                            ),
-                            shape: const CircleBorder(),
-                            elevation: 0.0,
-                            onPressed: () {
-                              setState(() {
-                                if (weight > 0) {
-                                  weight--;
-                                }
-                              });
-                            },
-                            child: const FaIcon(
-                              FontAwesomeIcons.minus,
-                              size: 25,
-                              color: kFloatingButtonForeground,
-                            ),
-                            fillColor: kFloatingButtonBackground,
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          RawMaterialButton(
-                            constraints: const BoxConstraints(
-                              minHeight: 60,
-                              minWidth: 60,
-                            ),
-                            shape: const CircleBorder(),
-                            elevation: 0.0,
-                            onPressed: () {
-                              setState(() {
-                                weight++;
-                              });
-                            },
-                            child: const FaIcon(
-                              FontAwesomeIcons.plus,
-                              size: 25,
-                              color: kFloatingButtonForeground,
-                            ),
-                            fillColor: kFloatingButtonBackground,
-                          ),
-                        ],
-                      )
-                    ],
+                  child: ReusableCard(
+                    cardColor: kActiveCardColor,
+                    cardChild: CustomCard(
+                      label: 'WEIGHT',
+                      value: weight,
+                      increaseValue: (myWeight) {
+                        print('current weight is $weight');
+                        setState(() {
+                          weight++;
+                        });
+                      },
+                      decreaseValue: (myWeight) {
+                        print('current weight is $weight');
+                        setState(() {
+                          weight--;
+                        });
+                      },
+                    ),
                   ),
-                )),
+                ),
                 Expanded(
                   child: ReusableCard(
                     cardColor: kActiveCardColor,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'AGE',
-                          style: kLabelTextStyle,
-                        ),
-                        Text(
-                          age.toString(),
-                          style: kValueTextStyle,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RawMaterialButton(
-                              constraints: const BoxConstraints(
-                                minHeight: 60,
-                                minWidth: 60,
-                              ),
-                              shape: const CircleBorder(),
-                              elevation: 0.0,
-                              onPressed: () {
-                                setState(() {
-                                  if (age > 0) {
-                                    age--;
-                                  }
-                                });
-                              },
-                              child: const FaIcon(
-                                FontAwesomeIcons.minus,
-                                size: 25,
-                                color: kFloatingButtonForeground,
-                              ),
-                              fillColor: kFloatingButtonBackground,
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            RawMaterialButton(
-                              constraints: const BoxConstraints(
-                                minHeight: 60,
-                                minWidth: 60,
-                              ),
-                              shape: const CircleBorder(),
-                              elevation: 0.0,
-                              onPressed: () {
-                                setState(() {
-                                  age++;
-                                });
-                              },
-                              child: const FaIcon(
-                                FontAwesomeIcons.plus,
-                                size: 25,
-                                color: kFloatingButtonForeground,
-                              ),
-                              fillColor: kFloatingButtonBackground,
-                            ),
-                          ],
-                        )
-                      ],
+                    cardChild: CustomCard(
+                      label: 'AGE',
+                      value: age,
+                      increaseValue: (myAge) {
+                        print('current age is $age');
+                        setState(() {
+                          age++;
+                        });
+                      },
+                      decreaseValue: (myAge) {
+                        print('current age is $age');
+                        setState(() {
+                          age--;
+                        });
+                      },
                     ),
                   ),
                 ),
@@ -295,6 +194,7 @@ class _InputPageState extends State<InputPage> {
             btnText: 'Calculate',
             onPress: () {
               print('selected gender $selectedGender');
+              print('age is $age - weight is $weight -height is $height');
               var result =
                   Calculator(weight, height, age, selectedGender).calculate();
               if (result.text != '' && result.value != 0.0) {
@@ -312,6 +212,87 @@ class _InputPageState extends State<InputPage> {
           )
         ],
       ),
+    );
+  }
+}
+
+class CustomCard extends StatefulWidget {
+  const CustomCard({
+    Key? key,
+    required this.label,
+    required this.value,
+    required this.increaseValue,
+    required this.decreaseValue,
+  }) : super(key: key);
+  final String label;
+  final int value;
+
+  final void Function(int value) increaseValue;
+  final void Function(int value) decreaseValue;
+
+  @override
+  State<CustomCard> createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          widget.label.toString(),
+          style: kLabelTextStyle,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          widget.value.toString(),
+          style: kValueTextStyle,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RawMaterialButton(
+              constraints: const BoxConstraints(
+                minHeight: 60,
+                minWidth: 60,
+              ),
+              shape: const CircleBorder(),
+              elevation: 0.0,
+              onPressed: () => widget.decreaseValue,
+              child: const FaIcon(
+                FontAwesomeIcons.minus,
+                size: 25,
+                color: kFloatingButtonForeground,
+              ),
+              fillColor: kFloatingButtonBackground,
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            RawMaterialButton(
+              constraints: const BoxConstraints(
+                minHeight: 60,
+                minWidth: 60,
+              ),
+              shape: const CircleBorder(),
+              elevation: 0.0,
+              onPressed: () => widget.increaseValue,
+              child: const FaIcon(
+                FontAwesomeIcons.plus,
+                size: 25,
+                color: kFloatingButtonForeground,
+              ),
+              fillColor: kFloatingButtonBackground,
+            ),
+          ],
+        )
+      ],
     );
   }
 }
