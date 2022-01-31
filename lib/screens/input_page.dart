@@ -264,7 +264,7 @@ class _CustomCardState extends State<CustomCard> {
               ),
               shape: const CircleBorder(),
               elevation: 0.0,
-              onPressed: () => widget.decreaseValue,
+              onPressed: () => widget.decreaseValue(widget.value),
               child: const FaIcon(
                 FontAwesomeIcons.minus,
                 size: 25,
@@ -282,7 +282,7 @@ class _CustomCardState extends State<CustomCard> {
               ),
               shape: const CircleBorder(),
               elevation: 0.0,
-              onPressed: () => widget.increaseValue,
+              onPressed: () => widget.increaseValue(widget.value),
               child: const FaIcon(
                 FontAwesomeIcons.plus,
                 size: 25,
