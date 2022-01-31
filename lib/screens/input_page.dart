@@ -1,6 +1,8 @@
 import 'package:bmi/Utilities/user_input.dart';
 import 'package:bmi/Utilities/constants.dart';
 import 'package:bmi/custom_widgets/custom_button.dart';
+import 'package:bmi/custom_widgets/custom_card.dart';
+import 'package:bmi/custom_widgets/custom_raw_button.dart';
 import 'package:bmi/custom_widgets/gender_card_content.dart';
 import 'package:bmi/custom_widgets/reusable_card.dart';
 import 'package:bmi/models/gender.dart';
@@ -134,7 +136,6 @@ class _InputPageState extends State<InputPage> {
                     onChanged: (double value) {
                       setState(() {
                         height = value.round().toDouble();
-                        // print(value.toInt().toString());
                       });
                     },
                   ),
@@ -157,7 +158,6 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       decreaseValue: (myWeight) {
-                        print('current weight is $weight');
                         setState(() {
                           if (weight > 0) {
                             weight--;
@@ -179,7 +179,6 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       decreaseValue: (myAge) {
-                        print('current age is $age');
                         setState(() {
                           age--;
                         });
@@ -195,6 +194,8 @@ class _InputPageState extends State<InputPage> {
             onPress: () {
               var result =
                   UserInput(weight, height, age, selectedGender).calculate();
+              print('weight is $weight - height is $height ');
+              print('age is $age - selectedGender is $selectedGender ');
               if (result.text != '' && result.value != 0.0) {
                 Navigator.push(
                   context,
@@ -211,99 +212,6 @@ class _InputPageState extends State<InputPage> {
           )
         ],
       ),
-    );
-  }
-}
-
-class CustomCard extends StatefulWidget {
-  const CustomCard({
-    Key? key,
-    required this.label,
-    required this.value,
-    required this.increaseValue,
-    required this.decreaseValue,
-  }) : super(key: key);
-  final String label;
-  final int value;
-
-  final void Function(int value) increaseValue;
-  final void Function(int value) decreaseValue;
-
-  @override
-  State<CustomCard> createState() => _CustomCardState();
-}
-
-class _CustomCardState extends State<CustomCard> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          widget.label.toString(),
-          style: kLabelTextStyle,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          widget.value.toString(),
-          style: kValueTextStyle,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomRawButton(
-              widget: widget,
-              widgetRef: widget,
-              icon: FontAwesomeIcons.plus,
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            CustomRawButton(
-              widget: widget,
-              widgetRef: widget,
-              icon: FontAwesomeIcons.minus,
-            ),
-          ],
-        )
-      ],
-    );
-  }
-}
-
-class CustomRawButton extends StatelessWidget {
-  const CustomRawButton({
-    Key? key,
-    required this.widget,
-    required this.widgetRef,
-    required this.icon,
-  }) : super(key: key);
-
-  final CustomCard widget;
-  final CustomCard widgetRef;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      constraints: const BoxConstraints(
-        minHeight: 60,
-        minWidth: 60,
-      ),
-      shape: const CircleBorder(),
-      elevation: 0.0,
-      onPressed: () => widgetRef.decreaseValue(widget.value),
-      child: FaIcon(
-        icon,
-        size: 25,
-        color: kFloatingButtonForeground,
-      ),
-      fillColor: kFloatingButtonBackground,
     );
   }
 }
