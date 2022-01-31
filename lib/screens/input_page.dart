@@ -181,9 +181,7 @@ class _InputPageState extends State<InputPage> {
                       decreaseValue: (myAge) {
                         print('current age is $age');
                         setState(() {
-                          if (age > 0) {
-                            age--;
-                          }
+                          age--;
                         });
                       },
                     ),
@@ -258,42 +256,54 @@ class _CustomCardState extends State<CustomCard> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            RawMaterialButton(
-              constraints: const BoxConstraints(
-                minHeight: 60,
-                minWidth: 60,
-              ),
-              shape: const CircleBorder(),
-              elevation: 0.0,
-              onPressed: () => widget.decreaseValue(widget.value),
-              child: const FaIcon(
-                FontAwesomeIcons.minus,
-                size: 25,
-                color: kFloatingButtonForeground,
-              ),
-              fillColor: kFloatingButtonBackground,
+            CustomRawButton(
+              widget: widget,
+              widgetRef: widget,
+              icon: FontAwesomeIcons.plus,
             ),
             const SizedBox(
               width: 15,
             ),
-            RawMaterialButton(
-              constraints: const BoxConstraints(
-                minHeight: 60,
-                minWidth: 60,
-              ),
-              shape: const CircleBorder(),
-              elevation: 0.0,
-              onPressed: () => widget.increaseValue(widget.value),
-              child: const FaIcon(
-                FontAwesomeIcons.plus,
-                size: 25,
-                color: kFloatingButtonForeground,
-              ),
-              fillColor: kFloatingButtonBackground,
+            CustomRawButton(
+              widget: widget,
+              widgetRef: widget,
+              icon: FontAwesomeIcons.minus,
             ),
           ],
         )
       ],
+    );
+  }
+}
+
+class CustomRawButton extends StatelessWidget {
+  const CustomRawButton({
+    Key? key,
+    required this.widget,
+    required this.widgetRef,
+    required this.icon,
+  }) : super(key: key);
+
+  final CustomCard widget;
+  final CustomCard widgetRef;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      constraints: const BoxConstraints(
+        minHeight: 60,
+        minWidth: 60,
+      ),
+      shape: const CircleBorder(),
+      elevation: 0.0,
+      onPressed: () => widgetRef.decreaseValue(widget.value),
+      child: FaIcon(
+        icon,
+        size: 25,
+        color: kFloatingButtonForeground,
+      ),
+      fillColor: kFloatingButtonBackground,
     );
   }
 }
