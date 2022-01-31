@@ -1,4 +1,4 @@
-import 'package:bmi/Utilities/calculator.dart';
+import 'package:bmi/Utilities/user_input.dart';
 import 'package:bmi/Utilities/constants.dart';
 import 'package:bmi/custom_widgets/custom_button.dart';
 import 'package:bmi/custom_widgets/gender_card_content.dart';
@@ -196,14 +196,15 @@ class _InputPageState extends State<InputPage> {
               print('selected gender $selectedGender');
               print('age is $age - weight is $weight -height is $height');
               var result =
-                  Calculator(weight, height, age, selectedGender).calculate();
+                  UserInput(weight, height, age, selectedGender).calculate();
               if (result.text != '' && result.value != 0.0) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResultsPage(
-                      result: result.value,
+                      resultValue: result.value,
                       resultText: result.text,
+                      resultAdvice: result.advice,
                     ),
                   ),
                 );

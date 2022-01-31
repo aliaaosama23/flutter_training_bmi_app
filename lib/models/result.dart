@@ -1,5 +1,10 @@
 class Result {
   final double value;
   final String text;
-  Result({required this.value, required this.text});
+  final String advice;
+  Result({
+    required this.value,
+    required this.text,
+    required this.advice,
+  });
 }

@@ -7,11 +7,13 @@ class ResultsPage extends StatelessWidget {
   const ResultsPage({
     Key? key,
     required this.resultText,
-    required this.result,
+    required this.resultValue,
+    required this.resultAdvice,
   }) : super(key: key);
 
   final String resultText;
-  final double result;
+  final double resultValue;
+  final String resultAdvice;
 
   @override
   Widget build(BuildContext context) {
@@ -45,17 +47,17 @@ class ResultsPage extends StatelessWidget {
                     style: kResultTextStyle,
                   ),
                   Text(
-                    result.toStringAsFixed(1),
+                    resultValue.toStringAsFixed(1),
                     style: kResultValueTextStyle,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 30,
                       vertical: 20,
                     ),
                     child: Text(
-                      'You have a normal body weight ',
-                      style: TextStyle(
+                      resultAdvice.toString(),
+                      style: const TextStyle(
                         color: kWhiteTextColor,
                         fontSize: 30,
                       ),
