@@ -152,7 +152,6 @@ class _InputPageState extends State<InputPage> {
                       label: 'WEIGHT',
                       value: weight,
                       increaseValue: (myWeight) {
-                        print('current weight is $weight');
                         setState(() {
                           weight++;
                         });
@@ -160,7 +159,9 @@ class _InputPageState extends State<InputPage> {
                       decreaseValue: (myWeight) {
                         print('current weight is $weight');
                         setState(() {
-                          weight--;
+                          if (weight > 0) {
+                            weight--;
+                          }
                         });
                       },
                     ),
@@ -173,7 +174,6 @@ class _InputPageState extends State<InputPage> {
                       label: 'AGE',
                       value: age,
                       increaseValue: (myAge) {
-                        print('current age is $age');
                         setState(() {
                           age++;
                         });
@@ -181,7 +181,9 @@ class _InputPageState extends State<InputPage> {
                       decreaseValue: (myAge) {
                         print('current age is $age');
                         setState(() {
-                          age--;
+                          if (age > 0) {
+                            age--;
+                          }
                         });
                       },
                     ),
@@ -193,8 +195,6 @@ class _InputPageState extends State<InputPage> {
           CustomButton(
             btnText: 'Calculate',
             onPress: () {
-              print('selected gender $selectedGender');
-              print('age is $age - weight is $weight -height is $height');
               var result =
                   UserInput(weight, height, age, selectedGender).calculate();
               if (result.text != '' && result.value != 0.0) {
