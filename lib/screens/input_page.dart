@@ -137,13 +137,13 @@ class _InputPageState extends State<InputPage> {
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
                 SliderTheme(
                   data: const SliderThemeData(
                     thumbShape: RoundSliderThumbShape(
-                      enabledThumbRadius: 20,
+                      enabledThumbRadius: 15, //20,
                     ),
                   ),
                   child: Slider(

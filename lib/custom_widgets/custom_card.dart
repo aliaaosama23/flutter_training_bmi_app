@@ -34,9 +34,9 @@ class _CustomCardState extends State<CustomCard> {
           widget.label.toString(),
           style: kLabelTextStyle,
         ),
-        const SizedBox(
-          height: 10,
-        ),
+        // const SizedBox(
+        //   height: 10,
+        // ),
         Text(
           widget.value.toString(),
           style: kValueTextStyle,

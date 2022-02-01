@@ -16,8 +16,8 @@ class CustomRawButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       constraints: const BoxConstraints(
-        minHeight: 60,
-        minWidth: 60,
+        minHeight: 40, //60,
+        minWidth: 40, // 60,
       ),
       shape: const CircleBorder(),
       elevation: 0.0,
