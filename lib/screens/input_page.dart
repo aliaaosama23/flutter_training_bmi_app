@@ -2,13 +2,13 @@ import 'package:bmi/Utilities/user_input.dart';
 import 'package:bmi/Utilities/constants.dart';
 import 'package:bmi/custom_widgets/custom_button.dart';
 import 'package:bmi/custom_widgets/custom_card.dart';
-import 'package:bmi/custom_widgets/custom_raw_button.dart';
 import 'package:bmi/custom_widgets/gender_card_content.dart';
 import 'package:bmi/custom_widgets/reusable_card.dart';
 import 'package:bmi/models/gender.dart';
 import 'package:bmi/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -50,6 +50,20 @@ class _InputPageState extends State<InputPage> {
         }
       }
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getLastResult();
+  }
+
+  getLastResult() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var lastResult = prefs.getDouble('result');
+    print('last result was $lastResult');
   }
 
   @override

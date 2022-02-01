@@ -2,6 +2,7 @@ import 'package:bmi/Utilities/constants.dart';
 import 'package:bmi/custom_widgets/custom_button.dart';
 import 'package:bmi/custom_widgets/reusable_card.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ResultsPage extends StatelessWidget {
   const ResultsPage({
@@ -65,11 +66,14 @@ class ResultsPage extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // save the result
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setDouble('result', resultValue);
                     },
                     child: const Text(
-                      'SAVE RESULT',
+                      'SAVE RESULT ',
                       style: kSaveButtonTextStyle,
                     ),
                     style: ButtonStyle(
