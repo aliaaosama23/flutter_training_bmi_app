@@ -8,6 +8,7 @@ import 'package:bmi/models/gender.dart';
 import 'package:bmi/screens/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InputPage extends StatefulWidget {
@@ -62,8 +63,13 @@ class _InputPageState extends State<InputPage> {
 
   getLastResult() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var lastResult = prefs.getDouble('result');
-    print('last result was $lastResult');
+    double? lastResult = prefs.getDouble('result');
+    print('last result was ${lastResult!.toStringAsFixed(1)}');
+    Alert(
+      context: context,
+      title: "last result was : ",
+      desc: lastResult.toStringAsFixed(1),
+    ).show();
   }
 
   @override
